@@ -11,6 +11,8 @@ import {
   DOMAIN
 } from '@/lib/constants';
 
+export const revalidate = 0;
+
 export default async function Home() {
   const articles = await getLiveArticles();
 
