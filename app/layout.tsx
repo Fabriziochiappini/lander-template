@@ -4,6 +4,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { BRAND_NAME, BRAND_TAGLINE, DOMAIN } from "@/lib/constants";
 import Link from "next/link";
+import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -31,14 +32,53 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({
+// Fetch GA ID dynamically from ADSEO — no redeploy needed when changed
+async function getGaId(): Promise<string | null> {
+  try {
+    const adseoUrl = process.env.ADSEO_API_URL;
+    if (!adseoUrl) return null;
+
+    const cleanDomain = DOMAIN.replace(/^https?:\/\//, '').replace(/\/$/, '');
+    const res = await fetch(
+      `${adseoUrl}/api/ga-config?domain=${cleanDomain}`,
+      { next: { revalidate: 300 } } // Cache 5 min, then re-fetch
+    );
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.ga_id || null;
+  } catch {
+    return null;
+  }
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gaId = await getGaId();
+
   return (
     <html lang="it" className="scroll-smooth">
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-white text-zinc-900 min-h-screen flex flex-col`}>
+        {/* Google Analytics — injected dynamically, no redeploy needed */}
+        {gaId && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${gaId}');
+              `}
+            </Script>
+          </>
+        )}
+
         {/* Navigation */}
         <nav className="sticky top-0 z-[100] bg-white/90 backdrop-blur-xl border-b border-zinc-100 py-4">
           <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
