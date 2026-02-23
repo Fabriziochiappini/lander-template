@@ -4,45 +4,27 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { BRAND_NAME, BRAND_TAGLINE, DOMAIN } from "@/lib/constants";
 import Link from "next/link";
-import Script from "next/script";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: 'swap',
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  weight: ['400', '700', '800'],
-  display: 'swap',
-});
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair", weight: ["400", "700", "800"], display: "swap" });
 
 export const metadata: Metadata = {
   title: `${BRAND_NAME} ${BRAND_TAGLINE}`,
   description: "Il punto di riferimento per l'eccellenza digitale e strategie SEO avanzate.",
   metadataBase: new URL(DOMAIN),
-  alternates: {
-    canonical: '/',
-  },
-  robots: {
-    index: true,
-    follow: true,
-  }
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true }
 };
 
-// Fetch GA ID dynamically from ADSEO — no redeploy needed when changed
+// Fetch GA ID from ADSEO at server render time — no redeploy needed
 async function getGaId(): Promise<string | null> {
   try {
     const adseoUrl = process.env.ADSEO_API_URL;
     if (!adseoUrl) return null;
-
-    const cleanDomain = DOMAIN.replace(/^https?:\/\//, '').replace(/\/$/, '');
-    const res = await fetch(
-      `${adseoUrl}/api/ga-config?domain=${cleanDomain}`,
-      { next: { revalidate: 300 } } // Cache 5 min, then re-fetch
-    );
+    const cleanDomain = DOMAIN.replace(/^https?:\/\//, "").replace(/\/$/, "");
+    const res = await fetch(`${adseoUrl}/api/ga-config?domain=${cleanDomain}`, {
+      next: { revalidate: 300 }
+    });
     if (!res.ok) return null;
     const data = await res.json();
     return data.ga_id || null;
@@ -51,44 +33,38 @@ async function getGaId(): Promise<string | null> {
   }
 }
 
-export default async function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const gaId = await getGaId();
 
   return (
     <html lang="it" className="scroll-smooth">
-      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-white text-zinc-900 min-h-screen flex flex-col`}>
-        {/* Google Analytics — injected dynamically, no redeploy needed */}
+      <head>
+        {/* Google Analytics — injected server-side, visible to crawlers */}
         {gaId && (
           <>
-            <Script
+            <script
+              async
               src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-              strategy="afterInteractive"
             />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${gaId}');
-              `}
-            </Script>
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${gaId}');
+                `,
+              }}
+            />
           </>
         )}
-
-        {/* Navigation */}
+      </head>
+      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-white text-zinc-900 min-h-screen flex flex-col`}>
         <nav className="sticky top-0 z-[100] bg-white/90 backdrop-blur-xl border-b border-zinc-100 py-4">
           <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-            <Link
-              href="/"
-              className="text-2xl font-serif font-bold tracking-tight hover:text-brand-600 transition-all active:scale-95"
-            >
+            <Link href="/" className="text-2xl font-serif font-bold tracking-tight hover:text-brand-600 transition-all active:scale-95">
               {BRAND_NAME}<span className="text-brand-500 italic">{BRAND_TAGLINE}</span>
             </Link>
-
             <div className="hidden md:flex items-center gap-10 text-sm font-semibold text-zinc-600">
               <Link href="/" className="hover:text-brand-600 transition-colors">Home</Link>
               <Link href="/#articoli" className="hover:text-brand-600 transition-colors">Magazine</Link>
@@ -98,11 +74,8 @@ export default async function RootLayout({
           </div>
         </nav>
 
-        <main className="flex-grow">
-          {children}
-        </main>
+        <main className="flex-grow">{children}</main>
 
-        {/* Footer */}
         <footer className="bg-zinc-50 pt-32 pb-16 mt-32 border-t border-zinc-100 text-center">
           <div className="max-w-7xl mx-auto px-6">
             <h2 className="text-3xl font-serif font-bold mb-8">{BRAND_NAME}<span className="text-brand-600 italic">.{BRAND_TAGLINE.toLowerCase()}</span></h2>
