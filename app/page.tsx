@@ -61,7 +61,7 @@ export default async function Home() {
           </h2>
           <div className="h-[1px] flex-grow mx-8 bg-zinc-100 hidden md:block"></div>
         </div>
-        <ArticleGrid articles={articles.slice(1)} />
+        <ArticleGrid articles={articles.slice(1, 8)} />
       </section>
 
       <section id="servizi">

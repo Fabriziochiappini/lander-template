@@ -67,7 +67,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             </Link>
             <div className="hidden md:flex items-center gap-10 text-sm font-semibold text-zinc-600">
               <Link href="/" className="hover:text-brand-600 transition-colors">Home</Link>
-              <Link href="/#articoli" className="hover:text-brand-600 transition-colors">Magazine</Link>
+              <Link href="/magazine" className="hover:text-brand-600 transition-colors">Magazine</Link>
+              <Link href="/guide" className="hover:text-brand-600 transition-colors">Guide</Link>
               <Link href="/#servizi" className="hover:text-brand-600 transition-colors">Servizi</Link>
               <button className="bg-zinc-900 text-white px-6 py-2.5 rounded-full hover:bg-brand-600 hover:shadow-lg hover:shadow-brand-200 transition-all">Consulenza</button>
             </div>
