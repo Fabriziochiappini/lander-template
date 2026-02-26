@@ -70,6 +70,22 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 <p className="text-2xl font-medium text-zinc-600 leading-relaxed italic border-l-4 border-brand-500 pl-8 mb-12">
                     {article.excerpt}
                 </p>
+
+                {/* Iniezione Automatica Link Interno (SEO Dinamico) */}
+                {articles.length > 1 && (
+                    <div className="my-12 p-8 bg-zinc-50 rounded-3xl border border-zinc-100 group hover:border-brand-200 transition-colors">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-brand-500 mb-2 block">Leggi anche</span>
+                        <h2 className="text-2xl md:text-3xl font-serif font-bold !mt-0 !mb-0">
+                            <a
+                                href={`${DOMAIN}/article/${articles.filter(a => a.slug !== slug)[Math.floor(Math.random() * (articles.length - 1))].slug}`}
+                                className="text-zinc-900 hover:text-brand-600 no-underline transition-colors"
+                            >
+                                {articles.filter(a => a.slug !== slug)[Math.floor(Math.random() * (articles.length - 1))].title}
+                            </a>
+                        </h2>
+                    </div>
+                )}
+
                 <div
                     className="text-zinc-800 space-y-8 leading-loose text-lg article-content"
                     dangerouslySetInnerHTML={{ __html: article.content.replace(/\[DOMAIN_LINK_ID\]/g, DOMAIN) }}
