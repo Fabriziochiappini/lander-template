@@ -6,6 +6,9 @@ import ServiceSection from '@/components/ServiceSection';
 import {
   HERO_TITLE,
   HERO_SUBTITLE,
+  SERVICES_TITLE,
+  SERVICES_SUBTITLE,
+  ARTICLES_TITLE,
   SERVICES,
   getLiveArticles,
   DOMAIN
@@ -57,7 +60,7 @@ export default async function Home() {
       <section id="articoli" className="mt-24">
         <div className="flex items-center justify-between mb-12 border-b border-zinc-100 pb-8">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-zinc-900 italic">
-            Ultimi Approfondimenti
+            {ARTICLES_TITLE}
           </h2>
           <div className="h-[1px] flex-grow mx-8 bg-zinc-100 hidden md:block"></div>
         </div>
@@ -65,7 +68,7 @@ export default async function Home() {
       </section>
 
       <section id="servizi">
-        <ServiceSection services={SERVICES} />
+        <ServiceSection services={SERVICES} title={SERVICES_TITLE} subtitle={SERVICES_SUBTITLE} />
       </section>
     </div>
   );

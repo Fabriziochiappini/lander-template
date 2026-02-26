@@ -20,6 +20,9 @@ export const BRAND_NAME = dynamic?.brandName || 'SitoWeb';
 export const BRAND_TAGLINE = dynamic?.brandTagline || 'Professionale';
 export const HERO_TITLE = dynamic?.heroTitle || 'Crea la tua Eccellenza Digitale Professionale.';
 export const HERO_SUBTITLE = dynamic?.heroSubtitle || 'Dal 2018 aiutiamo professionisti e aziende a scalare i motori di ricerca con siti web ultra-veloci e design orientato alla conversione.';
+export const SERVICES_TITLE = dynamic?.servicesTitle || 'Servizi di Elite Digital Strategy';
+export const SERVICES_SUBTITLE = dynamic?.servicesSubtitle || 'Sviluppiamo ecosistemi digitali che combinano estetica superiore e ingegneria Next.js ad alte prestazioni.';
+export const ARTICLES_TITLE = dynamic?.articlesTitle || 'Ultimi Approfondimenti';
 export const CAMPAIGN_ID = dynamic?.campaignId || null;
 
 // Initialize Supabase client
@@ -83,7 +86,13 @@ export const ARTICLES: Article[] = [
   }
 ];
 
-export const SERVICES: Service[] = [
+export const SERVICES: Service[] = dynamic?.services?.length > 0 ? dynamic.services.map((s: any, i: number) => ({
+  id: `s${i + 1}`,
+  title: s.title,
+  description: s.description,
+  // Add matching icons to dynamically generated services
+  icon: i === 0 ? 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4' : i === 1 ? 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' : 'M13 10V3L4 14h7v7l9-11h-7z'
+})) : [
   {
     id: 's1',
     title: 'Sviluppo Next.js Enterprise',
@@ -95,5 +104,11 @@ export const SERVICES: Service[] = [
     title: 'SEO & Content Marketing',
     description: 'Strategie di posizionamento organico basate su dati e contenuti generati per convertire.',
     icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
+  },
+  {
+    id: 's3',
+    title: 'Web Design',
+    description: 'Design moderno e funzionale.',
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z'
   }
 ];
