@@ -2,7 +2,7 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import { getLiveArticles } from '@/lib/constants';
+import { getLiveArticles, DOMAIN } from '@/lib/constants';
 
 interface ArticlePageProps {
     params: Promise<{ slug: string }>;
@@ -72,7 +72,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 </p>
                 <div
                     className="text-zinc-800 space-y-8 leading-loose text-lg article-content"
-                    dangerouslySetInnerHTML={{ __html: article.content }}
+                    dangerouslySetInnerHTML={{ __html: article.content.replace(/\[DOMAIN_LINK_ID\]/g, DOMAIN) }}
                 />
             </div>
 
