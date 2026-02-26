@@ -93,6 +93,34 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             </div>
 
             <footer className="mt-24 pt-10 border-t border-zinc-100">
+                {/* Articoli Correlati (SEO Mesh) */}
+                {articles.length > 1 && (
+                    <div className="mb-16">
+                        <h3 className="text-2xl font-serif font-bold text-zinc-900 mb-8 flex items-center gap-3">
+                            <span className="w-8 h-px bg-brand-500"></span>
+                            Articoli Correlati
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {articles
+                                .filter(a => a.slug !== slug)
+                                .sort(() => 0.5 - Math.random()) // Mischia l'ordine
+                                .slice(0, 3) // Prendine al massimo 3
+                                .map((rel) => (
+                                    <a
+                                        key={rel.slug}
+                                        href={`${DOMAIN}/article/${rel.slug}`}
+                                        className="group block p-5 bg-zinc-50 rounded-2xl border border-zinc-100 hover:border-brand-200 hover:bg-white transition-all hover:shadow-xl hover:shadow-zinc-200/50"
+                                    >
+                                        <p className="text-[10px] font-black uppercase tracking-widest text-brand-500 mb-3">{rel.category || 'Approfondimento'}</p>
+                                        <h4 className="text-lg font-bold text-zinc-900 leading-snug group-hover:text-brand-600 transition-colors">
+                                            {rel.title}
+                                        </h4>
+                                    </a>
+                                ))}
+                        </div>
+                    </div>
+                )}
+
                 <p className="text-zinc-500 italic mb-8">
                     Ogni progetto è un&apos;opportunità per ridefinire gli standard.
                     Con Next.js, non stiamo solo costruendo un sito, stiamo costruendo un vantaggio competitivo reale e misurabile.
