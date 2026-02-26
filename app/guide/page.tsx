@@ -49,7 +49,7 @@ export default function GuidePage() {
                         </p>
 
                         <ul className="space-y-4 mb-8">
-                            {guide.steps.map((step, sIdx) => (
+                            {guide.steps?.map((step: string, sIdx: number) => (
                                 <li key={sIdx} className="flex items-center gap-3 text-zinc-700">
                                     <CheckCircle2 className="w-5 h-5 text-brand-500 shrink-0" />
                                     <span>{step}</span>
