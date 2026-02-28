@@ -32,24 +32,63 @@ export default function GuidePage() {
                 </p>
             </header>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-24">
-                {GUIDES.map((guide: any, idx: number) => (
-                    <div key={idx} className="bg-white p-10 rounded-[2rem] border border-zinc-100 shadow-sm hover:shadow-xl transition-all duration-500 group">
-                        <div className="w-14 h-14 bg-zinc-900 text-white rounded-2xl flex items-center justify-center font-bold text-xl mb-8 group-hover:bg-zinc-800 transition-colors">
-                            {idx + 1}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-24">
+                {GUIDES.map((guide: any, idx: number) => {
+                    // Ciclare tra diversi stili
+                    const styles = [
+                        "bg-white border-zinc-100 shadow-sm", // Standard
+                        "bg-zinc-50 border-zinc-200 shadow-md", // Soft accent
+                        "bg-white border-zinc-200 shadow-xl ring-1 ring-zinc-50" // Premium raised
+                    ];
+                    const currentStyle = styles[idx % styles.length];
+
+                    return (
+                        <div key={idx} className={`${currentStyle} p-10 rounded-[2.5rem] border hover:scale-[1.02] transition-all duration-500 group flex flex-col`}>
+                            <div className="flex items-center gap-4 mb-8">
+                                <div className="w-12 h-12 bg-zinc-900 text-white rounded-xl flex items-center justify-center font-serif font-black text-xl">
+                                    0{idx + 1}
+                                </div>
+                                <div className="h-[1px] flex-grow bg-zinc-100 group-hover:bg-zinc-200 transition-colors"></div>
+                            </div>
+
+                            <h3 className="text-2xl md:text-3xl font-serif font-bold text-zinc-900 mb-6 group-hover:text-zinc-500 transition-colors">
+                                {guide.title}
+                            </h3>
+
+                            <p className="text-zinc-500 mb-8 leading-relaxed text-sm">
+                                {guide.description}
+                            </p>
+
+                            {/* Varietà nella struttura dei contenuti: Liste vs Schemi */}
+                            {idx % 2 === 0 ? (
+                                <ul className="space-y-4 mb-8 flex-grow">
+                                    {guide.steps.map((step: string, sIdx: number) => (
+                                        <li key={sIdx} className="flex items-start gap-3 text-sm text-zinc-600 bg-white/50 p-3 rounded-xl border border-zinc-50 hover:bg-white transition-colors">
+                                            <span className="text-zinc-900 font-black">→</span>
+                                            {step}
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <div className="space-y-3 mb-8 flex-grow">
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Schema Operativo</span>
+                                    <div className="p-4 bg-white rounded-2xl border border-dashed border-zinc-200 space-y-3">
+                                        {guide.steps.map((step: string, sIdx: number) => (
+                                            <div key={sIdx} className="text-xs text-zinc-700 flex items-center gap-2">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-zinc-900"></div>
+                                                {step}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            <div className="pt-6 border-t border-zinc-50 mt-auto">
+                                <span className="text-[10px] font-black uppercase tracking-tight text-zinc-300">Curiosità & Tips</span>
+                            </div>
                         </div>
-                        <h3 className="text-2xl font-serif font-bold text-zinc-900 mb-6">{guide.title}</h3>
-                        <p className="text-zinc-500 mb-8 leading-relaxed">{guide.description}</p>
-                        <ul className="space-y-4">
-                            {guide.steps.map((step: string, sIdx: number) => (
-                                <li key={sIdx} className="flex items-start gap-4 text-sm text-zinc-600">
-                                    <span className="text-zinc-900 mt-1 font-bold">✓</span>
-                                    {step}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
 
             {/* Video Section - Solo se ID presente */}
