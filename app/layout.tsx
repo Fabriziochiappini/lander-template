@@ -53,7 +53,8 @@ export default function RootLayout({
 
             <div className="hidden md:flex items-center gap-10 text-sm font-semibold text-zinc-600">
               <Link href="/" className="hover:text-zinc-900 transition-colors">Home</Link>
-              <Link href="/#articoli" className="hover:text-zinc-900 transition-colors">Magazine</Link>
+              <Link href="/magazine" className="hover:text-zinc-900 transition-colors">Magazine</Link>
+              <Link href="/guida" className="hover:text-zinc-900 transition-colors">Guida</Link>
               <Link href="/#servizi" className="hover:text-zinc-900 transition-colors">Servizi</Link>
               <button className="bg-zinc-900 text-white px-6 py-2.5 rounded-full hover:bg-zinc-800 hover:shadow-lg transition-all">Consulenza</button>
             </div>
