@@ -26,6 +26,15 @@ export const SITE_TITLE = dynamic?.siteTitle || `${BRAND_NAME} ${BRAND_TAGLINE}`
 export const META_DESCRIPTION = dynamic?.metaDescription || "Il punto di riferimento per l'eccellenza digitale e strategie SEO avanzate.";
 export const CAMPAIGN_ID = dynamic?.campaignId || null;
 
+// Guide & Video Content
+export const GUIDE_HERO_TITLE = dynamic?.guideHeroTitle || 'Guida alla Scelta Professionale';
+export const GUIDE_HERO_SUBTITLE = dynamic?.guideHeroSubtitle || 'Suggerimenti pratici e checklist per massimizzare i tuoi risultati.';
+export const GUIDES = dynamic?.guides || [];
+export const GUIDE_CTA_TITLE = dynamic?.guideCtaTitle || 'Hai bisogno di supporto?';
+export const GUIDE_CTA_SUBTITLE = dynamic?.guideCtaSubtitle || 'Contattaci oggi per una consulenza gratuita e personalizzata.';
+export const GUIDE_CTA_TEXT = dynamic?.guideCtaText || 'Contattaci Ora';
+export const YOUTUBE_VIDEO_ID = dynamic?.youtubeVideoId || ''; // Can be empty if not provided
+
 // Initialize Supabase client
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://example.supabase.co',
