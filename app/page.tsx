@@ -3,6 +3,8 @@ import JsonLd from '@/components/JsonLd';
 import MagazineHero from '@/components/MagazineHero';
 import ArticleGrid from '@/components/ArticleGrid';
 import ServiceSection from '@/components/ServiceSection';
+import YouTubeVideo from '@/components/YouTubeVideo';
+import Link from 'next/link';
 import {
   SERVICES,
   getLiveArticles,
@@ -13,7 +15,8 @@ import {
   META_DESCRIPTION,
   SERVICES_TITLE,
   HERO_TITLE,
-  HERO_SUBTITLE
+  HERO_SUBTITLE,
+  YOUTUBE_VIDEO_ID
 } from '@/lib/constants';
 import { Metadata } from 'next';
 
@@ -85,6 +88,20 @@ export default async function Home() {
       <section id="servizi">
         <ServiceSection services={SERVICES} />
       </section>
+
+      {/* Video Section - Dynamic */}
+      {YOUTUBE_VIDEO_ID && (
+        <section className="mt-12">
+          <YouTubeVideo videoId={YOUTUBE_VIDEO_ID} title={`Video Informativo per ${BRAND_NAME}`} />
+        </section>
+      )}
+
+      {/* Link to Guide */}
+      <div className="mt-20 text-center">
+        <Link href="/guida" className="inline-flex items-center gap-2 text-zinc-900 font-bold border-b-2 border-brand-500 pb-1 hover:text-brand-600 transition-colors uppercase tracking-widest text-xs">
+          Esplora la nostra Guida Completa & Checklists →
+        </Link>
+      </div>
     </div>
   );
 }
