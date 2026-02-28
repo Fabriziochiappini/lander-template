@@ -20,17 +20,8 @@ export const BRAND_NAME = dynamic?.brandName || 'SitoWeb';
 export const BRAND_TAGLINE = dynamic?.brandTagline || 'Professionale';
 export const HERO_TITLE = dynamic?.heroTitle || 'Crea la tua Eccellenza Digitale Professionale.';
 export const HERO_SUBTITLE = dynamic?.heroSubtitle || 'Dal 2018 aiutiamo professionisti e aziende a scalare i motori di ricerca con siti web ultra-veloci e design orientato alla conversione.';
-export const SERVICES_TITLE = dynamic?.servicesTitle || 'Servizi di Elite Digital Strategy';
-export const SERVICES_SUBTITLE = dynamic?.servicesSubtitle || 'Sviluppiamo ecosistemi digitali che combinano estetica superiore e ingegneria Next.js ad alte prestazioni.';
-export const ARTICLES_TITLE = dynamic?.articlesTitle || 'Ultimi Approfondimenti';
-
-// Guide Page Titles
-export const GUIDE_HERO_TITLE = dynamic?.guideHeroTitle || 'Guide & Risorse SEO';
-export const GUIDE_HERO_SUBTITLE = dynamic?.guideHeroSubtitle || 'Le nostre guide pratiche per aiutarti a navigare nel mondo del digital marketing e del posizionamento organico.';
-export const GUIDE_CTA_TITLE = dynamic?.guideCtaTitle || 'Hai bisogno di una strategia personalizzata?';
-export const GUIDE_CTA_SUBTITLE = dynamic?.guideCtaSubtitle || 'Il nostro team di esperti è pronto ad analizzare il tuo progetto e fornirti una roadmap chiara per il successo online.';
-export const GUIDE_CTA_TEXT = dynamic?.guideCtaText || 'Contattaci Ora';
-
+export const SITE_TITLE = dynamic?.siteTitle || `${BRAND_NAME} ${BRAND_TAGLINE}`;
+export const META_DESCRIPTION = dynamic?.metaDescription || "Il punto di riferimento per l'eccellenza digitale e strategie SEO avanzate.";
 export const CAMPAIGN_ID = dynamic?.campaignId || null;
 
 // Initialize Supabase client
@@ -94,13 +85,7 @@ export const ARTICLES: Article[] = [
   }
 ];
 
-export const SERVICES: Service[] = dynamic?.services?.length > 0 ? dynamic.services.map((s: any, i: number) => ({
-  id: `s${i + 1}`,
-  title: s.title,
-  description: s.description,
-  // Add matching icons to dynamically generated services
-  icon: i === 0 ? 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4' : i === 1 ? 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' : 'M13 10V3L4 14h7v7l9-11h-7z'
-})) : [
+export const SERVICES: Service[] = [
   {
     id: 's1',
     title: 'Sviluppo Next.js Enterprise',
@@ -112,29 +97,5 @@ export const SERVICES: Service[] = dynamic?.services?.length > 0 ? dynamic.servi
     title: 'SEO & Content Marketing',
     description: 'Strategie di posizionamento organico basate su dati e contenuti generati per convertire.',
     icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
-  },
-  {
-    id: 's3',
-    title: 'Web Design',
-    description: 'Design moderno e funzionale.',
-    icon: 'M13 10V3L4 14h7v7l9-11h-7z'
-  }
-];
-
-export const GUIDES = dynamic?.guides?.length > 0 ? dynamic.guides : [
-  {
-    title: "Come ottimizzare il tuo sito per i motori di ricerca",
-    description: "Scopri le basi della SEO e come applicarle al tuo progetto digitale per scalare le classifiche di Google.",
-    steps: ["Ricerca delle parole chiave", "Ottimizzazione on-page", "Link building strategica", "Monitoraggio dei risultati"]
-  },
-  {
-    title: "Guida alla creazione di contenuti di valore",
-    description: "Impara a scrivere articoli che non solo piacciono ai motori di ricerca, ma convertono i visitatori in clienti.",
-    steps: ["Identificazione del target", "Strutturazione dell'articolo", "Uso corretto degli heading", "Call to action efficaci"]
-  },
-  {
-    title: "Performance Web: Perché la velocità è tutto",
-    description: "Analizziamo l'impatto dei Core Web Vitals sul posizionamento e sull'esperienza utente.",
-    steps: ["Ottimizzazione immagini", "Caching avanzato", "Riduzione del tempo di risposta server", "Utilizzo di CDN"]
   }
 ];
