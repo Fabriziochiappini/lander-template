@@ -14,6 +14,7 @@ import {
   SITE_TITLE,
   META_DESCRIPTION,
   SERVICES_TITLE,
+  SERVICES_SUBTITLE,
   HERO_TITLE,
   HERO_SUBTITLE,
   YOUTUBE_VIDEO_ID
@@ -86,7 +87,11 @@ export default async function Home() {
       </section>
 
       <section id="servizi">
-        <ServiceSection services={SERVICES} />
+        <ServiceSection
+          title={SERVICES_TITLE}
+          subtitle={SERVICES_SUBTITLE}
+          services={SERVICES}
+        />
       </section>
 
       {/* Video Section - Dynamic */}

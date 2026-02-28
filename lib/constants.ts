@@ -21,6 +21,7 @@ export const BRAND_TAGLINE = dynamic?.brandTagline || 'Professionale';
 export const HERO_TITLE = dynamic?.heroTitle || 'Crea la tua Eccellenza Digitale Professionale.';
 export const HERO_SUBTITLE = dynamic?.heroSubtitle || 'Dal 2018 aiutiamo professionisti e aziende a scalare i motori di ricerca con siti web ultra-veloci e design orientato alla conversione.';
 export const SERVICES_TITLE = dynamic?.servicesTitle || 'Soluzioni Digitali di Eccellenza';
+export const SERVICES_SUBTITLE = dynamic?.servicesSubtitle || 'Sviluppiamo ecosistemi digitali che combinano estetica superiore e architetture moderne ad alte prestazioni.';
 export const FOOTER_QUOTE = dynamic?.footerQuote || 'Ogni progetto è un\'opportunità per ridefinire gli standard.';
 export const SITE_TITLE = dynamic?.siteTitle || `${BRAND_NAME} ${BRAND_TAGLINE}`;
 export const META_DESCRIPTION = dynamic?.metaDescription || "Il punto di riferimento per l'eccellenza digitale e strategie SEO avanzate.";
@@ -96,17 +97,23 @@ export const ARTICLES: Article[] = [
   }
 ];
 
-export const SERVICES: Service[] = [
+export const SERVICES: Service[] = dynamic?.services || [
   {
     id: 's1',
     title: 'Sviluppo Web Enterprise',
-    description: 'Siti ultra-veloci con architettura moderna, ottimizzati per massime performance e scalabilità.',
+    description: 'Architetture moderne ottimizzate per la velocità, progettate per massime performance e scalabilità infinita.',
     icon: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4'
   },
   {
     id: 's2',
-    title: 'SEO & Content Marketing',
-    description: 'Strategie di posizionamento organico basate su dati e contenuti generati per convertire.',
+    title: 'Strategia SEO Avanzata',
+    description: 'Dominio dei risultati di ricerca attraverso analisi dei dati e contenuti ingegnerizzati per la massima conversione.',
     icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
+  },
+  {
+    id: 's3',
+    title: 'Brand Identity & Design',
+    description: 'Design minimale e d\'impatto che comunica autorità e trasforma i visitatori in clienti fidelizzati.',
+    icon: 'M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h14a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z'
   }
 ];
