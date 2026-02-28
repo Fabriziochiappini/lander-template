@@ -99,8 +99,8 @@ export const ARTICLES: Article[] = [
 export const SERVICES: Service[] = [
   {
     id: 's1',
-    title: 'Sviluppo Next.js Enterprise',
-    description: 'Siti ultra-veloci con architettura App Router, ottimizzati per massime performance e scalabilità.',
+    title: 'Sviluppo Web Enterprise',
+    description: 'Siti ultra-veloci con architettura moderna, ottimizzati per massime performance e scalabilità.',
     icon: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4'
   },
   {
