@@ -5,14 +5,22 @@ interface YouTubeVideoProps {
     title?: string;
 }
 
+const getYouTubeId = (urlOrId: string) => {
+    if (!urlOrId || urlOrId === 'No selection' || urlOrId.includes(' ')) return null;
+    if (urlOrId.length === 11) return urlOrId;
+    const match = urlOrId.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&]{11})/);
+    return match ? match[1] : (urlOrId.length === 11 ? urlOrId : null);
+};
+
 const YouTubeVideo: React.FC<YouTubeVideoProps> = ({ videoId, title = "Video di Approfondimento" }) => {
-    if (!videoId) return null;
+    const cleanId = getYouTubeId(videoId);
+    if (!cleanId) return null;
 
     return (
-        <section className="my-24 overflow-hidden rounded-[2.5rem] bg-zinc-900 shadow-2xl">
-            <div className="relative aspect-video w-full">
+        <section className="my-24 overflow-hidden rounded-[2.5rem] bg-zinc-900 shadow-2xl border border-zinc-800">
+            <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
                 <iframe
-                    src={`https://www.youtube.com/embed/${videoId}?rel=0&autoplay=0`}
+                    src={`https://www.youtube.com/embed/${cleanId}?rel=0&autoplay=0`}
                     title={title}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
