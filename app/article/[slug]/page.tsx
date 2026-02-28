@@ -138,14 +138,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 />
             </div>
 
-            {/* Video di Approfondimento */}
-            {YOUTUBE_VIDEO_ID && (
-                <div className="mt-16 pb-16 border-b border-zinc-100">
-                    <h3 className="text-2xl font-serif font-bold mb-8">Video di Approfondimento</h3>
-                    <YouTubeVideo videoId={YOUTUBE_VIDEO_ID} />
-                </div>
-            )}
-
             {/* Articoli Correlati */}
             <section className="mt-24">
                 <div className="flex items-center justify-between mb-12">
