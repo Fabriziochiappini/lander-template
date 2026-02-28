@@ -98,7 +98,7 @@ export default async function Home() {
 
       {/* Link to Guide */}
       <div className="mt-20 text-center">
-        <Link href="/guida" className="inline-flex items-center gap-2 text-zinc-900 font-bold border-b-2 border-brand-500 pb-1 hover:text-brand-600 transition-colors uppercase tracking-widest text-xs">
+        <Link href="/guida" className="inline-flex items-center gap-2 text-zinc-900 font-bold border-b-2 border-zinc-900 pb-1 hover:text-brand-600 transition-colors uppercase tracking-widest text-xs">
           Esplora la nostra Guida Completa & Checklists →
         </Link>
       </div>
