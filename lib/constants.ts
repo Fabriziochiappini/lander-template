@@ -34,7 +34,7 @@ export const GUIDES = dynamic?.guides || [];
 export const GUIDE_CTA_TITLE = dynamic?.guideCtaTitle || 'Hai bisogno di supporto?';
 export const GUIDE_CTA_SUBTITLE = dynamic?.guideCtaSubtitle || 'Contattaci oggi per una consulenza gratuita e personalizzata.';
 export const GUIDE_CTA_TEXT = dynamic?.guideCtaText || 'Contattaci Ora';
-export const YOUTUBE_VIDEO_ID = dynamic?.youtubeVideoId || 'dQw4w9WgXcQ'; // Fallback to a valid video for template testing
+export const YOUTUBE_VIDEO_ID = dynamic?.youtubeVideoId || ''; // Empty by default, populated by AI
 
 // Initialize Supabase client
 const supabase = createClient(
