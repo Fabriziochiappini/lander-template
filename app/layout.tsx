@@ -32,15 +32,35 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({
+// Fetch GA ID dynamically from ADSEO — no redeploy needed when changed
+async function getGaId(): Promise<string | null> {
+  try {
+    const adseoUrl = process.env.ADSEO_API_URL || 'https://adseo-v2.vercel.app';
+    if (!adseoUrl) return null;
+    const cleanDomain = DOMAIN.replace(/^https?:\/\//, "").replace(/\/$/, "");
+    const res = await fetch(`${adseoUrl}/api/ga-config?domain=${cleanDomain}`, {
+      next: { revalidate: 300 } // Re-check every 5 minutes
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.ga_id || null;
+  } catch {
+    return null;
+  }
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gaId = await getGaId();
+  const gaIdFinal = gaId || process.env.NEXT_PUBLIC_GA_ID || '';
+
   return (
     <html lang="it" className="scroll-smooth">
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-white text-zinc-900 min-h-screen flex flex-col`}>
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ''} />
+        <GoogleAnalytics gaId={gaIdFinal} />
         {/* Navigation */}
         <nav className="sticky top-0 z-[100] bg-white/90 backdrop-blur-xl border-b border-zinc-100 py-4">
           <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
