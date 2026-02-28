@@ -4,17 +4,34 @@ import MagazineHero from '@/components/MagazineHero';
 import ArticleGrid from '@/components/ArticleGrid';
 import ServiceSection from '@/components/ServiceSection';
 import {
-  HERO_TITLE,
-  HERO_SUBTITLE,
-  SERVICES_TITLE,
-  SERVICES_SUBTITLE,
-  ARTICLES_TITLE,
   SERVICES,
   getLiveArticles,
-  DOMAIN
+  DOMAIN,
+  BRAND_NAME,
+  BRAND_TAGLINE,
+  SITE_TITLE,
+  META_DESCRIPTION,
+  SERVICES_TITLE,
+  HERO_TITLE,
+  HERO_SUBTITLE
 } from '@/lib/constants';
+import { Metadata } from 'next';
 
-export const revalidate = 0;
+export const metadata: Metadata = {
+  title: SITE_TITLE,
+  description: META_DESCRIPTION,
+  alternates: {
+    canonical: DOMAIN,
+  },
+  openGraph: {
+    title: SITE_TITLE,
+    description: META_DESCRIPTION,
+    url: DOMAIN,
+    siteName: BRAND_NAME,
+    type: 'website',
+    locale: 'it-IT',
+  }
+};
 
 export default async function Home() {
   const articles = await getLiveArticles();
@@ -22,15 +39,12 @@ export default async function Home() {
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Sito Web Professionale Online",
-    "description": "Leader nella consulenza e sviluppo web professionale con Next.js e SEO avanzata.",
+    "name": BRAND_NAME,
+    "description": META_DESCRIPTION,
     "url": DOMAIN,
-    "telephone": "+39021234567",
+    "image": `${DOMAIN}/favicon.ico`,
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Via del Business 1",
-      "addressLocality": "Milano",
-      "postalCode": "20121",
       "addressCountry": "IT"
     },
     "service": SERVICES.map(s => ({
@@ -39,6 +53,7 @@ export default async function Home() {
       "description": s.description
     }))
   };
+
 
   return (
     <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-7xl mx-auto px-6 py-4">
@@ -60,15 +75,15 @@ export default async function Home() {
       <section id="articoli" className="mt-24">
         <div className="flex items-center justify-between mb-12 border-b border-zinc-100 pb-8">
           <h2 className="text-2xl md:text-3xl font-serif font-bold text-zinc-900 italic">
-            {ARTICLES_TITLE}
+            Magazine & Approfondimenti
           </h2>
           <div className="h-[1px] flex-grow mx-8 bg-zinc-100 hidden md:block"></div>
         </div>
-        <ArticleGrid articles={articles.slice(1, 8)} />
+        <ArticleGrid articles={articles.slice(1)} />
       </section>
 
       <section id="servizi">
-        <ServiceSection services={SERVICES} title={SERVICES_TITLE} subtitle={SERVICES_SUBTITLE} />
+        <ServiceSection services={SERVICES} />
       </section>
     </div>
   );
