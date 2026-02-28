@@ -35,7 +35,7 @@ export default function GuidePage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-24">
                 {GUIDES.map((guide: any, idx: number) => (
                     <div key={idx} className="bg-white p-10 rounded-[2rem] border border-zinc-100 shadow-sm hover:shadow-xl transition-all duration-500 group">
-                        <div className="w-14 h-14 bg-zinc-900 text-white rounded-2xl flex items-center justify-center font-bold text-xl mb-8 group-hover:bg-brand-600 transition-colors">
+                        <div className="w-14 h-14 bg-zinc-900 text-white rounded-2xl flex items-center justify-center font-bold text-xl mb-8 group-hover:bg-zinc-800 transition-colors">
                             {idx + 1}
                         </div>
                         <h3 className="text-2xl font-serif font-bold text-zinc-900 mb-6">{guide.title}</h3>
@@ -43,7 +43,7 @@ export default function GuidePage() {
                         <ul className="space-y-4">
                             {guide.steps.map((step: string, sIdx: number) => (
                                 <li key={sIdx} className="flex items-start gap-4 text-sm text-zinc-600">
-                                    <span className="text-brand-500 mt-1 font-bold">✓</span>
+                                    <span className="text-zinc-900 mt-1 font-bold">✓</span>
                                     {step}
                                 </li>
                             ))}
@@ -61,12 +61,12 @@ export default function GuidePage() {
 
             {/* Final CTA */}
             <section className="bg-zinc-900 rounded-[3rem] p-12 md:p-20 text-center text-white mt-12 overflow-hidden relative">
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-brand-500/10 to-transparent pointer-events-none"></div>
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-zinc-900/10 to-transparent pointer-events-none"></div>
                 <h2 className="text-3xl md:text-5xl font-serif font-bold mb-8 relative z-10">{GUIDE_CTA_TITLE}</h2>
                 <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto mb-12 relative z-10 leading-relaxed">
                     {GUIDE_CTA_SUBTITLE}
                 </p>
-                <button className="bg-white text-zinc-900 px-10 py-4 rounded-full font-bold text-lg hover:bg-brand-500 hover:text-white transition-all shadow-lg hover:shadow-brand-500/20 relative z-10">
+                <button className="bg-white text-zinc-900 px-10 py-4 rounded-full font-bold text-lg hover:bg-zinc-900 hover:text-white transition-all shadow-lg hover:shadow-zinc-900/20 relative z-10">
                     {GUIDE_CTA_TEXT}
                 </button>
             </section>
