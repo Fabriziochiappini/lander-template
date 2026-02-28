@@ -2,8 +2,11 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import { getLiveArticles, DOMAIN, BRAND_NAME } from '@/lib/constants';
+import YouTubeVideo from '@/components/YouTubeVideo';
+import ArticleGrid from '@/components/ArticleGrid';
+import { getLiveArticles, DOMAIN, BRAND_NAME, YOUTUBE_VIDEO_ID } from '@/lib/constants';
 import type { Metadata, ResolvingMetadata } from 'next';
+import Link from 'next/link';
 
 interface ArticlePageProps {
     params: Promise<{ slug: string }>;
@@ -135,10 +138,31 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 />
             </div>
 
-            <footer className="mt-24 pt-10 border-t border-zinc-100">
-                <p className="text-zinc-500 italic mb-8">
-                    Ogni progetto è un&apos;opportunità per ridefinire gli standard.
-                    Con Next.js, non stiamo solo costruendo un sito, stiamo costruendo un vantaggio competitivo reale e misurabile.
+            {/* Video di Approfondimento */}
+            {YOUTUBE_VIDEO_ID && (
+                <div className="mt-16 pb-16 border-b border-zinc-100">
+                    <h3 className="text-2xl font-serif font-bold mb-8">Video di Approfondimento</h3>
+                    <YouTubeVideo videoId={YOUTUBE_VIDEO_ID} />
+                </div>
+            )}
+
+            {/* Articoli Correlati */}
+            <section className="mt-24">
+                <div className="flex items-center justify-between mb-12">
+                    <h2 className="text-3xl font-serif font-bold">Continua a leggere</h2>
+                    <Link href="/#articoli" className="text-zinc-500 hover:text-zinc-900 transition-colors font-semibold text-sm">
+                        Vedi tutti →
+                    </Link>
+                </div>
+                <ArticleGrid
+                    articles={articles.filter(a => a.slug !== slug).sort(() => 0.5 - Math.random()).slice(0, 3)}
+                />
+            </section>
+
+            <footer className="mt-32 pt-16 border-t border-zinc-100">
+                <p className="text-zinc-400 italic text-center max-w-2xl mx-auto">
+                    La nostra missione è fornire informazioni trasparenti e di valore.
+                    Ogni articolo è redatto con cura per garantire il massimo supporto alla nostra community.
                 </p>
             </footer>
         </article>
