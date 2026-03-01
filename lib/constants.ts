@@ -14,17 +14,17 @@ const getDynamicContent = () => {
 
 const dynamic = getDynamicContent();
 
-const rawDomain = dynamic?.domain || 'https://sitowebprofessionale.online';
+const rawDomain = dynamic?.domain || 'https://tuosito.it';
 export const DOMAIN = rawDomain.startsWith('http') ? rawDomain : `https://${rawDomain}`;
-export const BRAND_NAME = dynamic?.brandName || (rawDomain.replace(/^https?:\/\//i, '').split('.')[0].charAt(0).toUpperCase() + rawDomain.replace(/^https?:\/\//i, '').split('.')[0].slice(1).toLowerCase()).replace(/\./g, ' ');
-export const BRAND_TAGLINE = dynamic?.brandTagline || 'Eccellenza e Qualità';
+export const BRAND_NAME = dynamic?.brandName || (rawDomain.replace(/^https?:\/\/(www\.)?/i, '').split('.')[0].charAt(0).toUpperCase() + rawDomain.replace(/^https?:\/\/(www\.)?/i, '').split('.')[0].slice(1).toLowerCase());
+export const BRAND_TAGLINE = dynamic?.brandTagline || 'Servizi Professionali';
 export const HERO_TITLE = dynamic?.heroTitle || `Servizi Professionali di ${BRAND_NAME}`;
 export const HERO_SUBTITLE = dynamic?.heroSubtitle || `Soluzioni di eccellenza progettate per massimizzare il tuo successo nel settore.`;
-export const SERVICES_TITLE = dynamic?.servicesTitle || 'I Nostri Servizi Esclusivi';
+export const SERVICES_TITLE = dynamic?.servicesTitle || `${BRAND_NAME} | I Nostri Servizi`;
 export const SERVICES_SUBTITLE = dynamic?.servicesSubtitle || 'Sviluppiamo soluzioni che combinano estetica superiore e prestazioni elevate.';
 export const FOOTER_QUOTE = dynamic?.footerQuote || 'Mettiamo la qualità al centro di ogni nostro progetto.';
 export const SITE_TITLE = dynamic?.siteTitle || `${BRAND_NAME} | ${BRAND_TAGLINE}`;
-export const META_DESCRIPTION = dynamic?.metaDescription || `Scopri l'eccellenza professionale di ${BRAND_NAME}. Servizi su misura per ogni ogni esigenza.`;
+export const META_DESCRIPTION = dynamic?.metaDescription || `Scopri l'eccellenza di ${BRAND_NAME}. Servizi su misura per ogni esigenza.`;
 export const CAMPAIGN_ID = dynamic?.campaignId || null;
 
 // Services Page Content
