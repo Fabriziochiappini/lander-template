@@ -5,6 +5,7 @@ import "./globals.css";
 import { SITE_TITLE, META_DESCRIPTION, DOMAIN, BRAND_NAME, BRAND_TAGLINE } from "@/lib/constants";
 import Link from "next/link";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import CookieBanner from "@/components/CookieBanner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -96,6 +97,7 @@ export default async function RootLayout({
             <p className="text-zinc-500 text-[10px]">&copy; {new Date().getFullYear()} {BRAND_NAME}. Informazione Libera e Trasparente. Tutti i diritti riservati.</p>
           </div>
         </footer>
+        <CookieBanner />
       </body>
     </html>
   );
