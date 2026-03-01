@@ -16,12 +16,13 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
     title: `Guida e Risorse | ${BRAND_NAME}`,
     description: GUIDE_HERO_SUBTITLE,
+    alternates: { canonical: '/guida' }
 };
 
 export default function GuidePage() {
     return (
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-7xl mx-auto px-6 py-12">
-            <Breadcrumbs items={[{ label: 'Home', path: '/' }, { label: 'Guida' }]} />
+            <Breadcrumbs items={[{ label: 'Guida' }]} />
 
             <header className="mb-20 mt-12 text-center">
                 <h1 className="text-4xl md:text-7xl font-serif font-bold leading-[1.1] text-zinc-900 max-w-4xl mx-auto">

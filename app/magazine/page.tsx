@@ -8,6 +8,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
     title: `Magazine | Tutte le ultime notizie di ${BRAND_NAME}`,
     description: `Esplora il nostro magazine con approfondimenti, guide e novità dal settore.`,
+    alternates: { canonical: '/magazine' }
 };
 
 export default async function MagazinePage() {
@@ -15,7 +16,7 @@ export default async function MagazinePage() {
 
     return (
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-7xl mx-auto px-6 py-12">
-            <Breadcrumbs items={[{ label: 'Home', path: '/' }, { label: 'Magazine' }]} />
+            <Breadcrumbs items={[{ label: 'Magazine' }]} />
 
             <header className="mb-20 mt-12">
                 <h1 className="text-4xl md:text-7xl font-serif font-bold leading-[1.1] text-zinc-900 max-w-4xl">

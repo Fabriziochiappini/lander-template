@@ -23,9 +23,6 @@ export const metadata: Metadata = {
   title: SITE_TITLE,
   description: META_DESCRIPTION,
   metadataBase: new URL(DOMAIN),
-  alternates: {
-    canonical: '/',
-  },
   robots: {
     index: true,
     follow: true,
@@ -75,8 +72,8 @@ export default async function RootLayout({
               <Link href="/" className="hover:text-zinc-900 transition-colors">Home</Link>
               <Link href="/magazine" className="hover:text-zinc-900 transition-colors">Magazine</Link>
               <Link href="/guida" className="hover:text-zinc-900 transition-colors">Guida</Link>
-              <Link href="/#servizi" className="hover:text-zinc-900 transition-colors">Servizi</Link>
-              <button className="bg-zinc-900 text-white px-6 py-2.5 rounded-full hover:bg-zinc-800 hover:shadow-lg transition-all">Consulenza</button>
+              <Link href="/servizi" className="hover:text-zinc-900 transition-colors">Servizi</Link>
+              <Link href="/#contatti" className="bg-zinc-900 text-white px-6 py-2.5 rounded-full hover:bg-zinc-800 hover:shadow-lg transition-all">Consulenza</Link>
             </div>
           </div>
         </nav>
@@ -89,7 +86,14 @@ export default async function RootLayout({
         <footer className="bg-zinc-50 pt-32 pb-16 mt-32 border-t border-zinc-100 text-center">
           <div className="max-w-7xl mx-auto px-6">
             <h2 className="text-3xl font-serif font-bold mb-8">{BRAND_NAME}<span className="text-zinc-500 italic">.{BRAND_TAGLINE.toLowerCase()}</span></h2>
-            <p className="text-zinc-400 text-sm italic">&copy; {new Date().getFullYear()} {BRAND_NAME}. Informazione Libera e Trasparente.</p>
+            <div className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 mb-8 text-xs text-zinc-600 font-medium tracking-wide uppercase">
+              <Link href="/privacy-policy" className="hover:text-brand-600 transition-colors">Privacy Policy</Link>
+              <span className="hidden md:inline opacity-20">•</span>
+              <Link href="/cookie-policy" className="hover:text-brand-600 transition-colors">Cookie Policy</Link>
+              <span className="hidden md:inline opacity-20">•</span>
+              <Link href="/servizi" className="hover:text-brand-600 transition-colors">Servizi</Link>
+            </div>
+            <p className="text-zinc-500 text-[10px]">&copy; {new Date().getFullYear()} {BRAND_NAME}. Informazione Libera e Trasparente. Tutti i diritti riservati.</p>
           </div>
         </footer>
       </body>
