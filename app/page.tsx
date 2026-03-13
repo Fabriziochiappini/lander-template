@@ -9,7 +9,6 @@ import {
   getLiveArticles,
   DOMAIN,
   BRAND_NAME,
-  BRAND_TAGLINE,
   SITE_TITLE,
   META_DESCRIPTION,
   SERVICES_TITLE,
@@ -18,6 +17,9 @@ import {
   HERO_SUBTITLE
 } from '@/lib/constants';
 import { Metadata } from 'next';
+
+// Revalidate ogni ora: i nuovi articoli appaiono senza re-deploy
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: SITE_TITLE,
@@ -32,6 +34,14 @@ export const metadata: Metadata = {
     siteName: BRAND_NAME,
     type: 'website',
     locale: 'it-IT',
+    images: [
+      {
+        url: `${DOMAIN}/api/og`,
+        width: 1200,
+        height: 630,
+        alt: BRAND_NAME,
+      },
+    ],
   }
 };
 
@@ -47,8 +57,12 @@ export default async function Home() {
     "image": `${DOMAIN}/favicon.ico`,
     "address": {
       "@type": "PostalAddress",
-      "addressCountry": "IT"
+      "addressCountry": "IT",
+      "addressLocality": "Roma",
+      "streetAddress": "Via Roma 1",
+      "postalCode": "00100"
     },
+    "telephone": "+390612345678",
     "service": SERVICES.map(s => ({
       "@type": "Service",
       "name": s.title,
@@ -91,7 +105,6 @@ export default async function Home() {
         />
       </section>
 
-      {/* Link to Guide */}
       <div className="mt-20 text-center">
         <Link href="/guida" className="inline-flex items-center gap-2 text-zinc-900 font-bold border-b-2 border-zinc-900 pb-1 hover:text-brand-600 transition-colors uppercase tracking-widest text-xs">
           Esplora la nostra Guida Completa & Checklists →
